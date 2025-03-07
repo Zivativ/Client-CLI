@@ -4,9 +4,9 @@
 #include "abs/rayguiabs.h"
 #include <string.h>
 
-
 char list[UINT16_MAX] = "System - System";
 
+char buffer[512];
 
 int main(){
     // just testing stuff
@@ -19,6 +19,10 @@ int main(){
     if(!client){
         return -2;
     }
+    netlib_tcp_send(client, "User has Joined!;", strlen("User has Joined!;"));
+    netlib_tcp_recv(client, buffer, 512);
+    printf("%s\n", buffer);
+    sprintf(list, "%s\n", buffer);
     SetTraceLogLevel(LOG_ERROR);
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(1600, 900, "h");
@@ -38,13 +42,16 @@ int main(){
         RayGUIDrawTextBox(10, GetScreenHeight() - 100, GetScreenWidth() - 200, 90, text, 30, true);
         int button = RayGUIDrawButton(GetScreenWidth() - 200, GetScreenHeight() - 100, 200, 90, "Send");
         if(button == 1 || IsKeyPressed(KEY_ENTER)){
-            printf("%s\n", text);
-            sprintf(list, "%s;User - %s", list, text);
+            //sprintf(list, "%s;User - %s", list, text);
             char serverres[512];
-            sprintf(serverres, "User - %s;", text);
+            sprintf(serverres, "%s", text);
             netlib_tcp_send(client, serverres, strlen(serverres));
+            netlib_tcp_recv(client, buffer, 512);
+            printf("%s\n", buffer);
+            sprintf(list, "%s\n", buffer);
             sprintf(text, "");
         }
+
 
         EndDrawing();
     }

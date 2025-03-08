@@ -10,7 +10,6 @@ void RayGUIInitialize(){
     GuiSetFont(InsGetFont());
     GuiSetStyle(DEFAULT, TEXT_SIZE, 25); 
     GuiSetStyle(LISTVIEW, TEXT_ALIGNMENT, TEXT_ALIGN_LEFT); 
-
 }
 
 int RayGUIDrawButton(int x, int y, int sizeX, int sizeY, const char* text){

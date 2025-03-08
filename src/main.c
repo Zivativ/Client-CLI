@@ -14,15 +14,13 @@ typedef struct _Data {
 } Data;
 
 DWORD WINAPI ReceiveMessage(void* data){
-
     Data datas;
     while(1){
         netlib_tcp_recv(client, &datas, sizeof(datas));
-        printf("Server - %s\n", datas.data);
+        printf("%s\n", datas.data);
         sprintf(datas.data, "");
         Sleep(1000);
     }
-    
 }
 int main(){
     if(netlib_init() < 0){
@@ -37,7 +35,7 @@ int main(){
     if(!client){
         printf("netlib_tcp_open failed: %s\n", netlib_get_error());
         return -1;
-    }\
+    }
     char buffer[512];
     CreateThread(NULL, 0, ReceiveMessage, NULL, 0, 0);
     while(1){

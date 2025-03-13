@@ -21,7 +21,8 @@ static inline void PrintErrorMessage(Data* datas){
     //Sleep(1000);
 }
 
-DWORD WINAPI ReceiveMessage(void* data){
+int ReceiveMessage(void* data){
+    info("NEW THREAD TYPE CREATED\n");
     Data datas;
     while(1){
         CONTINUE:
@@ -44,3 +45,7 @@ DWORD WINAPI ReceiveMessage(void* data){
         
     }
 }
+
+// int ReceiveMessage(void* data){
+
+// }

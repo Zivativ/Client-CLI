@@ -13,7 +13,7 @@
 
 
 
-DWORD WINAPI ReceiveMessage(void* data);
+int ReceiveMessage(void* data);
 
 
 

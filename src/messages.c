@@ -9,7 +9,8 @@ extern tcp_socket client;
 static inline void PrintMessage(Data* datas){
     printf("%s\n", datas->data);
     sprintf(datas->data, "");
-    Sleep(100);
+    //Sleep(100);
+    //thrd_sleep()
 }
 
 

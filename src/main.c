@@ -10,13 +10,13 @@ void ChangeUsername(){
     info("Enter Username: ");
     fgets(buffer, 64, stdin);
     strtok(buffer, "\n");
-    sprintf_s(usernamed.data, 64,"%.64s\n", buffer);
+    sprintf(usernamed.data,"%.64s\n", buffer);
     strtok(usernamed.data, "\n");
     info("%s\n", usernamed.data);
     netlib_tcp_send(client, &usernamed, sizeof(usernamed));
     Data data;
     netlib_tcp_recv(client, &data, sizeof(Data));
-    if(data.success != TRUE){
+    if(data.success != true){
         fail("Username was Taken! Choose Another username\n");
         ChangeUsername();
         return;
@@ -47,7 +47,7 @@ int main(){
     while(1){
         fgets(buffer, 512, stdin);
         Data front = {0, true, 1, ""};
-        strcpy_s(front.data, 512, buffer);
+        strcpy(front.data, buffer);
         Data back;
         netlib_tcp_send(client, &front, sizeof(front));
     }
